@@ -6,6 +6,7 @@ except ImportError:
 import googleapiclient.errors
 import apiclient.http
 import httplib2
+import errno
 
 from . import lib
 
@@ -14,6 +15,7 @@ RETRIABLE_EXCEPTIONS = [
     httplib.IncompleteRead, httplib.ImproperConnectionState,
     httplib.CannotSendRequest, httplib.CannotSendHeader,
     httplib.ResponseNotReady, httplib.BadStatusLine,
+    errno.EPIPE, errno.ETIMEDOUT,
 ]
 
 def _upload_to_request(request, progress_callback):
